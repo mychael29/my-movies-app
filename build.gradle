@@ -5,6 +5,8 @@ buildscript {
         dagger_version = '2.25.2'
         lifecycle_version = '2.2.0'
         junitVersion = '4.12'
+        glideVersion = '4.11.0'
+        glideCompilerVersion = '4.11.0'
         // annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
         libs = [
                 dagger          : ('com.google.dagger:dagger:' + dagger_version),

@@ -1,6 +1,5 @@
 package com.meza.moviesapp.ui.activity.movie
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,7 +9,6 @@ import com.meza.moviesapp.BR
 import com.meza.moviesapp.R
 import com.meza.moviesapp.databinding.ActivityMoviesBinding
 import com.meza.moviesapp.ui.BaseActivity
-import com.meza.moviesapp.ui.activity.movie.detail.MovieDetailActivity
 import dagger.android.AndroidInjection.inject
 import java.io.Serializable
 
@@ -33,10 +31,9 @@ class MoviesActivity : BaseActivity<MoviesViewModel, ActivityMoviesBinding>() {
         })
 
         viewModel.touchListenerItem.observe(this, Observer {
-            startActivity(Intent(this, MovieDetailActivity::class.java))
+            // startActivity(Intent(this, MovieDetailActivity::class.java))
         })
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_movies, menu)

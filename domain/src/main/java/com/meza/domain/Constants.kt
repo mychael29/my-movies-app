@@ -8,4 +8,5 @@ object Constants {
     const val LOGIN_REQUEST_CODE = 1
     const val USER_NAME = "Admin"
     const val PASSWORD = "Password*123"
+    const val BASE_IMAGE = URL_BASE + "W500/"
 }
