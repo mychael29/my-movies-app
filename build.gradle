@@ -1,0 +1,43 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        kotlin_version = '1.4.21'
+        dagger_version = '2.25.2'
+        lifecycle_version = '2.2.0'
+        junitVersion = '4.12'
+        // annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+        libs = [
+                dagger          : ('com.google.dagger:dagger:' + dagger_version),
+                daggerCompiler  : ('com.google.dagger:dagger-compiler:' + dagger_version),
+                daggerAndroid   : ('com.google.dagger:dagger-android:' + dagger_version),
+                daggerAndroidSupport  : ('com.google.dagger:dagger-android-support:' + dagger_version),
+                daggerAndroidProcessor : ('com.google.dagger:dagger-android-processor:' + dagger_version),
+                junit           : ('junit:junit:' + junitVersion),
+        ]
+    }
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

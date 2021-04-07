@@ -1,0 +1,8 @@
+package com.meza.moviesapp.core.di.modules
+
+import javax.inject.Scope
+
+@Scope
+@MustBeDocumented
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+annotation class AuthScope

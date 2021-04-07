@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="movieDetailViewModel"
+            type="com.meza.moviesapp.ui.activity.movie.detail.MovieDetailViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="297dp"
+            android:layout_height="200dp"
+            android:src="@drawable/working" />
+
+    </LinearLayout>
+</layout>
