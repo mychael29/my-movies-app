@@ -1,11 +1,11 @@
 package com.meza.data.network.service
 
-import android.util.Log
 import com.meza.domain.entity.Result
 import com.meza.data.network.apis.MoviesApi
 import com.meza.data.network.request.AuthRequest
 import com.meza.data.network.response.*
 import com.meza.domain.Constants.API_KEY
+import com.meza.domain.Constants.ERROR_AUTH
 import com.meza.domain.Constants.PASSWORD
 import com.meza.domain.Constants.USER_NAME
 import com.meza.domain.entity.Failure
@@ -20,19 +20,9 @@ import javax.net.ssl.SSLHandshakeException
 class MoviesServiceImpl(private val moviesApi: MoviesApi): MoviesService {
     override suspend fun authenticate(authenticate: AuthRequest): Result<AuthResponse, Failure> {
         return if (authenticate.user.username == USER_NAME && authenticate.user.password == PASSWORD) {
-            apiCall(call = {
-                Response.success(200,
-                    AuthResponse(
-                        AuthData(
-                            UserData("1", "Maycol", "Meza Roque", ProfileData("es"))
-                        )
-                    )
-                )
-            })
+            apiCall(call = { RESPONSE_MOCK_UP })
         } else {
-            apiCall(call = {
-                throw Throwable("El usuario o contraseña es incorrecta")
-            })
+            apiCall(call = { throw Throwable(ERROR_AUTH) })
         }
     }
 
@@ -69,18 +59,18 @@ class MoviesServiceImpl(private val moviesApi: MoviesApi): MoviesService {
             return withContext(Dispatchers.IO) {
                 try {
                     val data = fromJson<ErrorResponse>(JSONObject(errorBody).toString())
-                    when (data.error.code) {
-                        4014 -> {
-                            return@withContext Failure.UnauthorizedOrForbidden(data.error.userMessage.es)
+                    when (data.status_code) {
+                        401 -> {
+                            return@withContext Failure.UnauthorizedOrForbidden(data.status_message)
                         }
-                        4017 -> {
-                            return@withContext Failure.UnauthorizedOrForbidden(data.error.userMessage.es)
+                        403 -> {
+                            return@withContext Failure.UnauthorizedOrForbidden(data.status_message)
                         }
-                        5001 -> {
-                            return@withContext Failure.ServerError(data.error.userMessage.es)
+                        500 -> {
+                            return@withContext Failure.ServerError(data.status_message)
                         }
                         else -> {
-                            return@withContext Failure.ServiceUncaughtFailure(data.error.userMessage.es)
+                            return@withContext Failure.ServiceUncaughtFailure(data.status_message)
                         }
                     }
                 } catch (e: Exception) {

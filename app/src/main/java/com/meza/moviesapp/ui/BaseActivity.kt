@@ -39,21 +39,4 @@ abstract class BaseActivity<VM : ViewModel, B : ViewDataBinding> : AppCompatActi
     abstract fun getViewBinding(): B
 
     abstract fun getBindingVariable(): Int
-
-
-    fun showLoader() {
-        val dialogBuilder = AlertDialog.Builder(this)
-        progressDialog = dialogBuilder.setCancelable(false)
-            .setView(R.layout.layout_progress_dialog)
-            .create()
-
-        progressDialog?.show()
-    }
-
-    fun dismissLoader() {
-        if (progressDialog?.isShowing == true) {
-            progressDialog?.dismiss()
-            progressDialog = null
-        }
-    }
 }

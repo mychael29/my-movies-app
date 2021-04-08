@@ -24,8 +24,8 @@ class MovieAdapter (private val items: MutableList<MovieModel>,
         }
     }
 
-    fun addItems(newItems: List<MovieModel>) {
-        items.clear()
+    fun addItems(newItems: List<MovieModel>, isNextPage: Boolean) {
+        if (!isNextPage) items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()
     }

@@ -17,6 +17,7 @@ class MovieDetailFragment: DialogFragment() {
     private lateinit var viewDataBinding: FragmentMovieDetailBinding
     private lateinit var rootView: View
     private val viewModel: MoviesViewModel by activityViewModels()
+
     companion object {
         fun newInstance() = MovieDetailFragment()
     }

@@ -1,6 +1,5 @@
 package com.meza.moviesapp.ui.activity.movie
 
-import android.os.Bundle
 import androidx.lifecycle.*
 import com.meza.moviesapp.UserSingleton
 import com.meza.moviesapp.mapper.MovieModelMapper
@@ -19,7 +18,6 @@ class MoviesViewModel @Inject constructor(
 ) : BaseViewModel<MoviesViewModel>() {
 
     val touchListenerItem = MutableLiveData<MovieModel>()
-
     private val _movieList = MutableLiveData<List<Movie>>()
     val movieList : LiveData<List<MovieModel>> = _movieList.switchMap {
         liveData {
@@ -33,26 +31,26 @@ class MoviesViewModel @Inject constructor(
 
     fun initiate() {
         handleLoading()
-        executeGetMovieListUseCase()
+        executeGetMovieListUseCase(1)
     }
 
-    fun bindItemsAfterMapping(movieListMapped: List<MovieModel>) {
+    fun bindItemsAfterMapping(movieListMapped: List<MovieModel>, isNextPage: Boolean) {
         setRefreshingView(false)
         showLoadingView(false)
         showErrorCauseView(false)
         showRvMovieListView(true)
-        adapter.addItems(movieListMapped)
+        adapter.addItems(movieListMapped, isNextPage)
     }
 
-    private fun executeGetMovieListUseCase() {
-        getMoviesUseCase.invoke(viewModelScope, GetMoviesUseCase.Params(1, UserSingleton.getUser().profile!!.language)) {
+    private fun executeGetMovieListUseCase(page: Int) {
+        getMoviesUseCase.invoke(viewModelScope, GetMoviesUseCase.Params(page, UserSingleton.getUser().profile!!.language)) {
             it.result(::handleUseCaseSuccess, ::handleUseCaseFailure)
         }
     }
 
-    fun refreshData() {
+    fun refreshData(page: Int) {
         setRefreshingView(true)
-        executeGetMovieListUseCase()
+        executeGetMovieListUseCase(page)
     }
 
     private fun handleLoading() {

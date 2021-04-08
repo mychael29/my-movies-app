@@ -25,27 +25,3 @@ fun ImageView.bindGlide(urlImage: String){
         .error(R.drawable.ic_broken_image)
         .into(this)
 }
-
-@BindingAdapter("passwordValidator")
-fun passwordValidator(editText: EditText, password: String?) {
-    val minimumLength = 4
-    if (TextUtils.isEmpty(password)) {
-        editText.error = null
-        return
-    }
-    if (editText.text.toString().length < minimumLength) {
-        editText.error = "Password must be minimum $minimumLength length"
-    } else editText.error = null
-}
-
-@BindingAdapter("usernameValidator")
-fun usernameValidator(editText: EditText, username: String?) {
-    val minimumLength = 4
-    if (TextUtils.isEmpty(username)) {
-        editText.error = null
-        return
-    }
-    if (editText.text.toString().length < minimumLength) {
-        editText.error = "Username must be minimum $minimumLength length"
-    } else editText.error = null
-}

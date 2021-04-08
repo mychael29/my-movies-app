@@ -12,17 +12,17 @@ data class MovieList(
 data class Movie(
     val id : Int,
     val video : Boolean,
-    val vote_count : Int,
-    val vote_average : Double,
-    val popularity : Double,
-    val title : String,
-    val release_date : String = "",
-    val original_language : String,
-    val original_title : String,
+    val vote_count : Int? = 0,
+    val vote_average : Double? = 0.0,
+    val popularity : Double? = 0.0,
+    val title : String? = "",
+    val release_date : String? = "",
+    val original_language : String? = "",
+    val original_title : String? = "",
     val genre_ids : List<Int>,
-    val backdrop_path : String,
+    val backdrop_path : String? = "",
     val adult : Boolean,
     val overview : String,
-    val poster_path : String
+    val poster_path : String? = ""
 ): Serializable
 

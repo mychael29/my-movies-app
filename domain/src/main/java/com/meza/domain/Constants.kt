@@ -15,4 +15,9 @@ object Constants {
     const val BASE_IMAGE_LARGE = BASE_IMAGE_URL + IMAGE_SIZE_W342
     const val BASE_IMAGE_MEDIUM = BASE_IMAGE_URL + IMAGE_SIZE_W185
     const val BASE_IMAGE_SMALL = BASE_IMAGE_URL + IMAGE_SIZE_W154
+    const val ERROR_AUTH = "El usuario o contraseña es incorrecta"
+    const val COUNT_LOAD_MORE = "countLoadMore"
+    const val IS_LOADING = "isLoading"
+    const val MOVIES_SAVE = "MOVIES_SAVE"
+
 }

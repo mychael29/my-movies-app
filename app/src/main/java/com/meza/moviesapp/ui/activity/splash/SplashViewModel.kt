@@ -24,9 +24,6 @@ class SplashViewModel: BaseViewModel<SplashViewModel>() {
                 handleInitiate()
             }
         }
-        GlobalScope.launch(context = Dispatchers.Main) {
-            println("launched coroutine 2")
-        }
     }
 
     private fun handleInitiate() {
