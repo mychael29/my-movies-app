@@ -9,6 +9,10 @@
         <variable
             name="loginViewModel"
             type="com.meza.moviesapp.ui.activity.login.LoginViewModel" />
+
+        <variable
+            name="fieldsModel"
+            type="com.meza.moviesapp.model.FieldsModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +26,8 @@
         tools:context=".ui.activity.login.LoginActivity">
 
         <EditText
+            app:usernameValidator="@{fieldsModel.username}"
+            android:text=""
             android:id="@+id/username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,6 +42,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            app:passwordValidator="@{fieldsModel.password}"
+            android:text=""
             android:id="@+id/password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -53,6 +61,7 @@
 
         <Button
             android:id="@+id/login"
+            android:onClick="@{(v) -> loginViewModel.login(username, password)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -60,7 +69,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="64dp"
-            android:enabled="false"
             android:text="@string/action_sign_in"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +85,7 @@
             android:layout_marginTop="64dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="64dp"
-            android:visibility="gone"
+            app:visible="@{loginViewModel.isLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/password"
             app:layout_constraintStart_toStartOf="@+id/password"

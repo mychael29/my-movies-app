@@ -5,10 +5,14 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import com.meza.domain.entity.Movie
+import com.meza.domain.entity.User
 import com.meza.moviesapp.BR
 import com.meza.moviesapp.R
+import com.meza.moviesapp.UserSingleton
 import com.meza.moviesapp.databinding.ActivityMoviesBinding
 import com.meza.moviesapp.ui.BaseActivity
+import com.meza.moviesapp.ui.activity.splash.SplashActivity
+import com.meza.moviesapp.util.extensions.launchActivity
 import dagger.android.AndroidInjection.inject
 import java.io.Serializable
 
@@ -42,7 +46,9 @@ class MoviesActivity : BaseActivity<MoviesViewModel, ActivityMoviesBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_fav -> {
-            //showDialogFragment()
+            UserSingleton.setUser(User())
+            launchActivity<SplashActivity>()
+            finish()
             true
         }
         else -> super.onOptionsItemSelected(item)

@@ -6,7 +6,7 @@ import com.meza.domain.entity.Movie
 
 class MoviesMapperImpl: MoviesMapper {
     private fun mapItemList(responseList: List<MovieData>): List<Movie> {
-        return responseList.map { (map(it)) }
+        return responseList.map { (mapItem(it)) }
     }
 
     override fun map(response: MovieListData): MovieList {
@@ -18,7 +18,7 @@ class MoviesMapperImpl: MoviesMapper {
         )
     }
 
-    override fun map(response: MovieData): Movie {
+    override fun mapItem(response: MovieData): Movie {
         return Movie(
             id = response.id,
             title = response.title,

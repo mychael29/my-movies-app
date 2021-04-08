@@ -33,6 +33,7 @@ class MoviesViewModel @Inject constructor(
 
     fun initiate() {
         handleLoading()
+        executeGetMovieListUseCase()
     }
 
     fun bindItemsAfterMapping(movieListMapped: List<MovieModel>) {
@@ -51,11 +52,6 @@ class MoviesViewModel @Inject constructor(
 
     fun refreshData() {
         setRefreshingView(true)
-        executeGetMovieListUseCase()
-    }
-
-    fun reloadData() {
-        handleLoading()
         executeGetMovieListUseCase()
     }
 

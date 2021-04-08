@@ -1,6 +1,5 @@
 package com.meza.data.repository
 
-import android.util.Log
 import com.meza.data.mapper.AuthMapper
 import com.meza.domain.repository.AuthRepository
 import com.meza.domain.entity.Result
@@ -18,11 +17,10 @@ class AuthRepositoryImpl @Inject constructor(
 ): AuthRepository {
 
     override suspend fun authenticate(authenticate: Authenticate): Result<Authenticator, Failure> {
-        Log.d("TAG", authenticate.toString())
         val authRequest =  mapper.mapRequest(authenticate)
-        return when (val result  = service.authenticate(authRequest)) {
-            is Result.Success -> Result.Success(mapper.mapResponse(result.result.data))
-            is Result.Error -> Result.Error(result.error)
+        return when (val response  = service.authenticate(authRequest)) {
+            is Result.Success -> Result.Success(mapper.mapResponse(response.result.result))
+            is Result.Error -> Result.Error(response.error)
         }
     }
 

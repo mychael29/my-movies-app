@@ -3,7 +3,7 @@ package com.meza.data.network.response
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-data class ServerResponse<T>(val data: T)
+data class ServerResponse<T>(val result: T)
 typealias AuthResponse = ServerResponse<AuthData>
 typealias MovieResponse = ServerResponse<MovieListData>
 typealias MovieDetailResponse = ServerResponse<MovieData>

@@ -15,7 +15,6 @@ import com.meza.domain.Constants.LOGIN_REQUEST_CODE
 import dagger.android.AndroidInjection.inject
 import javax.inject.Inject
 
-
 class SplashActivity : AppCompatActivity() {
     @Inject
     lateinit var providerFactory: ViewModelFactory
@@ -56,6 +55,8 @@ class SplashActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == LOGIN_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             loadMovies()
+        } else{
+            finish()
         }
     }
 }

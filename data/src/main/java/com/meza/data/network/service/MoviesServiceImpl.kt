@@ -1,5 +1,6 @@
 package com.meza.data.network.service
 
+import android.util.Log
 import com.meza.domain.entity.Result
 import com.meza.data.network.apis.MoviesApi
 import com.meza.data.network.request.AuthRequest
@@ -35,11 +36,11 @@ class MoviesServiceImpl(private val moviesApi: MoviesApi): MoviesService {
         }
     }
 
-    override suspend fun getMovieList(page: Int, language: String): Result<MovieResponse, Failure> {
+    override suspend fun getMovieList(page: Int, language: String): Result<MovieListData, Failure> {
         return apiCall(call = { moviesApi.getMovieListAsync(API_KEY, language, page) })
     }
 
-    override suspend fun getMovieDetail(movie_id: Int, language: String): Result<MovieDetailResponse, Failure> {
+    override suspend fun getMovieDetail(movie_id: Int, language: String): Result<MovieData, Failure> {
         return apiCall(call = { moviesApi.getMovieDetailAsync(API_KEY, movie_id, language) })
     }
 

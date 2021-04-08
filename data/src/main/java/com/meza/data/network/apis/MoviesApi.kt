@@ -7,17 +7,17 @@ import retrofit2.http.*
 interface MoviesApi {
 
     @GET("movie/upcoming")
-    fun getMovieListAsync(
+    suspend fun getMovieListAsync(
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Response<MovieResponse>
+    ): Response<MovieListData>
 
     @GET("movie/{movie_id}")
-    fun getMovieDetailAsync(
+    suspend fun getMovieDetailAsync(
         @Query("api_key") apiKey: String,
         @Path("movie_id") movieId: Int,
         @Query("language") language: String
-    ): Response<MovieDetailResponse>
+    ): Response<MovieData>
 
 }

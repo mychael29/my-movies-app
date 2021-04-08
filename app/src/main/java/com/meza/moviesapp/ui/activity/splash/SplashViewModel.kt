@@ -17,7 +17,7 @@ class SplashViewModel: BaseViewModel<SplashViewModel>() {
 
     fun initiateApp() {
         GlobalScope.launch(context = Dispatchers.Main) {
-            delay(3000)
+            delay(2000)
             if (UserSingleton.getUser()._id == null) {
                 handleNotInitiate(Failure.None)
             } else {

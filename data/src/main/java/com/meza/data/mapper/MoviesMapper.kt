@@ -7,5 +7,5 @@ import com.meza.domain.entity.MovieList
 
 interface MoviesMapper {
     fun map(response: MovieListData): MovieList
-    fun map(response: MovieData): Movie
+    fun mapItem(response: MovieData): Movie
 }

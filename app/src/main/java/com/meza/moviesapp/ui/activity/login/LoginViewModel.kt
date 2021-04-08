@@ -1,8 +1,10 @@
 package com.meza.moviesapp.ui.activity.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import android.util.Patterns
+import android.widget.EditText
 import androidx.lifecycle.viewModelScope
 import com.meza.moviesapp.R
 import com.meza.moviesapp.UserSingleton
@@ -13,19 +15,19 @@ import com.meza.domain.entity.Authenticate
 import com.meza.domain.entity.Authenticator
 import com.meza.domain.entity.Profile
 import com.meza.domain.usecase.auth.GetAuthUseCase
+import com.meza.moviesapp.model.FieldsModel
+import com.meza.moviesapp.model.MovieModel
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
     private val getAuthUseCase: GetAuthUseCase
 ) : BaseViewModel<SplashViewModel>() {
 
-    private val _loginForm = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginForm
-
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
     private fun handleInitiate(authenticator: Authenticator) {
+        showLoadingView(false)
         _loginResult.value =
             LoginResult(
                 success = LoggedInUserView(
@@ -36,47 +38,18 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun handleNotInitiate(failure: Failure) {
+        showLoadingView(false)
         _loginResult.value =
             LoginResult(
                 error = handleUseCaseFailureFromInitiate(failure)
             )
     }
 
-    fun login(username: String, password: String) {
-        val authenticate = Authenticate(username, password, Profile("es"))
+    fun login(username: EditText, password: EditText) {
+        showLoadingView(true)
+        val authenticate = Authenticate(username.text.toString(), password.text.toString(), Profile("es"))
         getAuthUseCase.invoke(viewModelScope, GetAuthUseCase.Params(authenticate)) {
             it.result(::handleInitiate, ::handleNotInitiate)
         }
-    }
-
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _loginForm.value =
-                LoginFormState(
-                    usernameError = R.string.invalid_username
-                )
-        } else if (!isPasswordValid(password)) {
-            _loginForm.value =
-                LoginFormState(
-                    passwordError = R.string.invalid_password
-                )
-        } else {
-            _loginForm.value =
-                LoginFormState(
-                    isDataValid = true
-                )
-        }
-    }
-
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-        } else {
-            username.isNotBlank()
-        }
-    }
-
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
     }
 }

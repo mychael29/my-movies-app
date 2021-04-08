@@ -16,15 +16,15 @@ class MoviesRepositoryImpl @Inject constructor(
 ): MoviesRepository {
 
     override suspend fun getMovies(page: Int, language: String): Result<MovieList, Failure> {
-        return when (val result  = service.getMovieList(page, language)) {
-            is Result.Success -> Result.Success(mapper.map(result.result.data))
-            is Result.Error -> Result.Error(result.error)
+        return when (val response  = service.getMovieList(page, language)) {
+            is Result.Success -> Result.Success(mapper.map(response.result))
+            is Result.Error -> Result.Error(response.error)
         }
     }
 
     override suspend fun getMovieDetail(movie_id: Int, language: String): Result<Movie, Failure> {
         return when (val result  = service.getMovieDetail(movie_id, language)) {
-            is Result.Success -> Result.Success(mapper.map(result.result.data))
+            is Result.Success -> Result.Success(mapper.mapItem(result.result))
             is Result.Error -> Result.Error(result.error)
         }
     }
