@@ -55,9 +55,9 @@ class DialogUtil {
         fun configDialogFragment(dialogFragment: DialogFragment, resources: Resources) {
             dialogFragment.dialog?.let { dialog ->
                 dialog.window?.let {
-                    it.setBackgroundDrawableResource(R.color.colorTransparent)
+                    it.setBackgroundDrawableResource(R.color.colorWhite)
                     it.setLayout(
-                        (resources.displayMetrics.widthPixels * 0.85).toInt(),
+                        (resources.displayMetrics.widthPixels * 0.95).toInt(),
                         (resources.displayMetrics.heightPixels * 0.80).toInt()
                     )
                 }

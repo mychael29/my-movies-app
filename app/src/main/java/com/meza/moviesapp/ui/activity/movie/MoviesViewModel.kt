@@ -18,7 +18,7 @@ class MoviesViewModel @Inject constructor(
     private val mapper: MovieModelMapper,
 ) : BaseViewModel<MoviesViewModel>() {
 
-    val touchListenerItem = MutableLiveData<Bundle>()
+    val touchListenerItem = MutableLiveData<MovieModel>()
 
     private val _movieList = MutableLiveData<List<Movie>>()
     val movieList : LiveData<List<MovieModel>> = _movieList.switchMap {
@@ -27,8 +27,8 @@ class MoviesViewModel @Inject constructor(
         }
     }
 
-    val adapter = MovieAdapter(arrayListOf()) { _, _->
-        touchListenerItem.value = Bundle()
+    val adapter = MovieAdapter(arrayListOf()) { _movieModel, _->
+        touchListenerItem.value = _movieModel
     }
 
     fun initiate() {

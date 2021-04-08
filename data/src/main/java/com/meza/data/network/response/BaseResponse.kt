@@ -5,8 +5,6 @@ import com.google.gson.reflect.TypeToken
 
 data class ServerResponse<T>(val result: T)
 typealias AuthResponse = ServerResponse<AuthData>
-typealias MovieResponse = ServerResponse<MovieListData>
-typealias MovieDetailResponse = ServerResponse<MovieData>
 
 inline fun <reified T> fromJson(json: String?): T = Gson().fromJson<T>(json, object: TypeToken<T>(){}.type)
 

@@ -11,6 +11,7 @@ import com.meza.moviesapp.R
 import com.meza.moviesapp.UserSingleton
 import com.meza.moviesapp.databinding.ActivityMoviesBinding
 import com.meza.moviesapp.ui.BaseActivity
+import com.meza.moviesapp.ui.activity.movie.detail.MovieDetailFragment
 import com.meza.moviesapp.ui.activity.splash.SplashActivity
 import com.meza.moviesapp.util.extensions.launchActivity
 import dagger.android.AndroidInjection.inject
@@ -35,7 +36,7 @@ class MoviesActivity : BaseActivity<MoviesViewModel, ActivityMoviesBinding>() {
         })
 
         viewModel.touchListenerItem.observe(this, Observer {
-            // startActivity(Intent(this, MovieDetailActivity::class.java))
+            showMovieDetailFragment()
         })
     }
 
@@ -52,6 +53,10 @@ class MoviesActivity : BaseActivity<MoviesViewModel, ActivityMoviesBinding>() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun showMovieDetailFragment() {
+        MovieDetailFragment.newInstance().show(supportFragmentManager, "MOVIE_DETAIL")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
